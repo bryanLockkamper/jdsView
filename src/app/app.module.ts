@@ -10,6 +10,7 @@ import { NbThemeModule, NbLayoutModule, NbCardModule, NbInputModule, NbSidebarMo
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthComponent } from './_components/auth/auth.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     AppComponent,
     NavComponent,
     HomeComponent,
+    AuthComponent,
 
   
 

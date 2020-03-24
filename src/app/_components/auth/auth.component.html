@@ -1,0 +1,96 @@
+<nb-card>
+
+    <nb-card-header>
+                <h2>Jds Application</h2>
+    </nb-card-header>
+
+    <nb-card-body>
+            <nb-card>
+
+                <div>
+                    <nb-card-body><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae aperiam ipsam tempore sapiente recusandae iure temporibus reiciendis nostrum quidem non explicabo rerum veniam fugit cupiditate ab eaque, error sunt nihil.</p></nb-card-body>
+                </div>
+
+                <div class="login">
+                    <form [formGroup]="loginForm" (ngSubmit)="login()">
+                        <div class="input-group">
+                            <input nbInput type="email" placeholder="email"
+                                   formControlName="email">
+                        </div>
+                        <div class="input-group">
+                            <input nbInput type="password" placeholder="password"
+                                   formControlName="password">
+                        </div>
+                        <div class="input-group">
+                            <input nbButton type="submit" value="LOGIN"
+                                   [disabled]="loginForm.invalid">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="register">
+                    <form [formGroup]="registerForm" (ngSubmit)="register()">
+                        <div class="input-group">
+                            <input nbInput type="email" placeholder="email"
+                                   formControlName="email">
+                        </div>
+                        <div class="input-group">
+                            <input nbInput type="password" placeholder="password"
+                                   formControlName="password">
+                        </div>
+                        <div class="input-group">
+                            <input nbInput type="password" placeholder="confirmpassword"
+                                   formControlName="confirmpassword">
+                        </div>
+                        <div class="input-group">
+                            <input nbInput type="text" placeholder="pseudo"
+                                   formControlName="pseudo">
+                        </div>
+                        <div class="input-group">
+                            <input nbInput type="text" placeholder="nom"
+                                   formControlName="nom">
+                        </div>
+                        <div class="input-group">
+                            <input nbInput type="text" placeholder="prenom"
+                                   formControlName="prenom">
+                        </div>
+                        <div class="input-group">
+                            <input nbInput type="date" placeholder="dateNaissance"
+                                   formControlName="dateNaissance">
+                        </div>
+                        <div class="input-group">
+                            <input nbInput type="text" placeholder="genre"
+                                   formControlName="genre">
+                        </div>
+                        <div class="input-group">
+                            <input nbInput type="text" placeholder="adresse"
+                                   formControlName="adresse">
+                        </div>
+                        <div class="input-group">
+                            <input nbInput type="tel" placeholder="numero"
+                                   formControlName="numero">
+                        </div>
+                        <div class="input-group">
+                            <input nbButton type="submit" value="REGISTER"
+                                   [disabled]="registerForm.invalid">
+                        </div>
+                    </form>
+                </div>
+
+            </nb-card> 
+    </nb-card-body>
+
+    <nb-card-footer>
+        <div>
+            <div>
+                <button nbButton>Connexion</button>
+            </div>
+            <div>
+                <button nbButton>Inscription</button>
+            </div>
+        </div>
+    </nb-card-footer>
+
+
+</nb-card>
+
