@@ -1,3 +1,5 @@
+import { AdresseRegister } from './adresseRegister';
+
 export interface RegisterModel {
     email: string;
     password: string;
@@ -7,6 +9,10 @@ export interface RegisterModel {
     prenom: string;
     dateNaissance: Date;
     genre: string;
-    adresse: string;
+    adresse: AdresseRegister;
     numero: string;
+    rue: string;
+    numeroAdresse: string;
+    codePostal: number;
+    ville: string;
   }
