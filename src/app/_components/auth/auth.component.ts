@@ -85,7 +85,7 @@ export class AuthComponent implements OnInit {
       .subscribe(token => {
         //====> Todo: gestion Token
         localStorage.setItem('TOKEN', token);
-        this.toastrService.info('Bienvenue sur notre site !!')
+        this.toastrService.info('Connecté! Bienvenue sur notre site !!')
         //message de success
         //rediriger le user
         this.router.navigateByUrl('/default/home');
@@ -97,7 +97,18 @@ export class AuthComponent implements OnInit {
   }
 
   register() {    
-    this.authService.register(this.registerForm.value).subscribe();
+    this.authService.register(this.registerForm.value).subscribe(token => {
+      //====> Todo: gestion Token
+      localStorage.setItem('TOKEN', token);
+      this.toastrService.info('Enregistré! Bienvenue sur notre site !!')
+      //message de success
+      //rediriger le user
+      this.router.navigateByUrl('/default/home');
+    }, error => {
+      console.log(error);
+      this.toastrService.danger('Login ou mdp incorrect!!')
+      //message d'erreur
+    });
 
   }
 

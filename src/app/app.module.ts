@@ -11,6 +11,9 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthComponent } from './_components/auth/auth.component';
+import { JeuComponent } from './_components/jeu/jeu.component';
+import { GenreComponent } from './_components/genre/genre.component';
+import { RencontreComponent } from './_components/rencontre/rencontre.component';
 
 
 @NgModule({
@@ -19,6 +22,9 @@ import { AuthComponent } from './_components/auth/auth.component';
     NavComponent,
     HomeComponent,
     AuthComponent,
+    JeuComponent,
+    GenreComponent,
+    RencontreComponent,
 
   
 
