@@ -1,4 +1,4 @@
-export interface AdresseRegister {
+export interface Adresse {
 
  rue: string;
  numero: string;
