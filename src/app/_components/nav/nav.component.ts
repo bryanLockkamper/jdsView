@@ -18,6 +18,10 @@ export class NavComponent implements OnInit {
       { title: 'Home', icon: 'home', link: '/home' },
       { title: 'Mon profil', icon: 'home', link: '/profils' },
       
+      { title: 'Jeux', icon: 'save', link: '/jeu' },
+      { title: 'Rencontres', icon: 'people', link: '/rencontre' },
+      { title: 'Genres', icon: 'folder', link: '/genre' },
+     
     ]
   }
 

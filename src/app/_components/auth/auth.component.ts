@@ -56,14 +56,16 @@ export class AuthComponent implements OnInit {
         null,
         Validators.compose([
           Validators.required,
-          Validators.max(255)
+          Validators.max(30),
+          //regex : ^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$
+          Validators.pattern("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$")
         ])
       ),
       'confirmpassword': new FormControl(
         null,
         Validators.compose([
           Validators.required,
-          Validators.max(255),
+          Validators.max(30),
         ])
       ),
       'pseudo': new FormControl( 
@@ -71,40 +73,9 @@ export class AuthComponent implements OnInit {
         Validators.required,
         
         ),
-
-      'nom': new FormControl(
-        null,
-      ),
-    
-      'prenom': new FormControl(
-        null,
-      ),
       'dateNaissance': new FormControl(
         null,
         Validators.required
-      ),
-      'genre': new FormControl(
-        null,
-      ),
-      'adresse': new FormControl(
-        null,
-      ),
-      'numero': new FormControl(
-        null,
-      ),
-      'rue': new FormControl(
-        null,
-
-      ),
-      'numeroAdresse': new FormControl(
-        null,
-
-      ),
-      'codePostal': new FormControl(
-        null,
-      ),
-      'ville': new FormControl(
-        null
       ),
     })
   }
@@ -114,7 +85,7 @@ export class AuthComponent implements OnInit {
       .subscribe(token => {
         //====> Todo: gestion Token
         localStorage.setItem('TOKEN', token);
-        this.toastrService.info('Bienvenue sur notre site !!')
+        this.toastrService.info('Connecté! Bienvenue sur notre site !!')
         //message de success
         //rediriger le user
         this.router.navigateByUrl('/default/home');
@@ -126,7 +97,18 @@ export class AuthComponent implements OnInit {
   }
 
   register() {    
-    this.authService.register(this.registerForm.value).subscribe();
+    this.authService.register(this.registerForm.value).subscribe(token => {
+      //====> Todo: gestion Token
+      localStorage.setItem('TOKEN', token);
+      this.toastrService.info('Enregistré! Bienvenue sur notre site !!')
+      //message de success
+      //rediriger le user
+      this.router.navigateByUrl('/default/home');
+    }, error => {
+      console.log(error);
+      this.toastrService.danger('Login ou mdp incorrect!!')
+      //message d'erreur
+    });
 
   }
 
