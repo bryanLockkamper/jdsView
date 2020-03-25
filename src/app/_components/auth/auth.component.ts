@@ -68,17 +68,16 @@ export class AuthComponent implements OnInit {
       ),
       'pseudo': new FormControl( 
         null,
-        Validators.required
+        Validators.required,
+        
         ),
 
       'nom': new FormControl(
         null,
-        Validators.required
       ),
     
       'prenom': new FormControl(
         null,
-        Validators.required
       ),
       'dateNaissance': new FormControl(
         null,
@@ -86,15 +85,26 @@ export class AuthComponent implements OnInit {
       ),
       'genre': new FormControl(
         null,
-        Validators.required
       ),
       'adresse': new FormControl(
         null,
-        Validators.required
       ),
       'numero': new FormControl(
         null,
-        Validators.required
+      ),
+      'rue': new FormControl(
+        null,
+
+      ),
+      'numeroAdresse': new FormControl(
+        null,
+
+      ),
+      'codePostal': new FormControl(
+        null,
+      ),
+      'ville': new FormControl(
+        null
       ),
     })
   }
