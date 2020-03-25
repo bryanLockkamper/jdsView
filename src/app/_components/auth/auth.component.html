@@ -11,7 +11,7 @@
                     <nb-card-body><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae aperiam ipsam tempore sapiente recusandae iure temporibus reiciendis nostrum quidem non explicabo rerum veniam fugit cupiditate ab eaque, error sunt nihil.</p></nb-card-body>
                 </div>
 
-                <div class="login">
+                <div class="login" *ngIf="isRegistered == 2">
                     <form [formGroup]="loginForm" (ngSubmit)="login()">
                         <div class="input-group">
                             <input nbInput type="email" placeholder="email"
@@ -28,7 +28,7 @@
                     </form>
                 </div>
 
-                <div class="register">
+                <div class="register" *ngIf="isRegistered == 1">
                     <form [formGroup]="registerForm" (ngSubmit)="register()">
                         <div class="input-group">
                             <input nbInput type="email" placeholder="email"
@@ -83,10 +83,10 @@
     <nb-card-footer>
         <div>
             <div>
-                <button nbButton>Connexion</button>
+                <button nbButton (click)="isRegistered = 2">Connexion</button>
             </div>
             <div>
-                <button nbButton>Inscription</button>
+                <button nbButton (click)="isRegistered = 1">Inscription</button>
             </div>
         </div>
     </nb-card-footer>

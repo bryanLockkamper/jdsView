@@ -14,6 +14,8 @@ export class AuthComponent implements OnInit {
   loginForm: FormGroup
   registerForm: FormGroup
 
+  isRegistered: number
+
   constructor(
     private authService: AuthService,
     private toastrService: NbToastrService,
@@ -21,6 +23,8 @@ export class AuthComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isRegistered = 0;
+
     this.loginForm = new FormGroup({
       'email': new FormControl(
         null,
@@ -111,7 +115,7 @@ export class AuthComponent implements OnInit {
       });
   }
 
-  register() {
+  register() {    
     this.authService.register(this.registerForm.value).subscribe();
 
   }
