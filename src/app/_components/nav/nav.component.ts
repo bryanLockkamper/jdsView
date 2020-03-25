@@ -9,6 +9,7 @@ import { NbMenuItem } from '@nebular/theme';
 export class NavComponent implements OnInit {
 
   items: NbMenuItem[];
+<<<<<<< HEAD
   
   constructor() { }
 
@@ -17,6 +18,15 @@ export class NavComponent implements OnInit {
     this.items = [
       { title: 'Home', icon: 'home', link: '/home' },
       
+=======
+
+  constructor() { }
+
+  ngOnInit(): void {
+    this.items = [
+      { title: 'Home', icon: 'home', link: '/home' },
+     
+>>>>>>> a4bacd6857af7b6eac4342cbb8d0f936883fbb88
     ]
   }
 
