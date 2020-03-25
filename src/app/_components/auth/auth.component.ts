@@ -56,7 +56,9 @@ export class AuthComponent implements OnInit {
         null,
         Validators.compose([
           Validators.required,
-          Validators.max(30)
+          Validators.max(30),
+          //regex : ^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$
+          Validators.pattern("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$")
         ])
       ),
       'confirmpassword': new FormControl(
