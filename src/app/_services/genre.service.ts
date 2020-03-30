@@ -38,9 +38,7 @@ export class GenreService {
       .pipe(finalize(() => this.getAllGenre()));
   }
 
-  update(g: Genre) {
-    console.log("Service " + g.titre + " " + g.description);
-    
+  update(g: Genre) {    
     return this.httpClient
     .post<Genre>(environment.apiDomain + 'modifierGenre' , g)
     .pipe(finalize(() => this.getAllGenre()));
