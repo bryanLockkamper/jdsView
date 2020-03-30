@@ -67,6 +67,7 @@ export class GenreComponent implements OnInit {
       console.log(error);
       this.toastr.danger('Une erreur est survenue');
     });
+    this.choix = 1;
   }
 
   delete(toDelete : Genre){    
