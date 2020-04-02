@@ -27,7 +27,7 @@ export class JeuService {
 
   delete(j: Jeu) : Observable<Jeu> {    
     return this.httpClient
-      .post<Jeu>(environment.apiDomain + 'supprimerJeu' ,  j
+      .post<Jeu>(environment.apiDomain + 'supprimerJeu' ,  j.id
     ).pipe(finalize(() => this.getAllJeu()));
   }
 

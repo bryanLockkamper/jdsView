@@ -86,8 +86,8 @@
                                formControlName="nbrJoueurMax">
                     </div>
                     <div class="input-group">
-                        <nb-select formControlName="genres">
-                            <nb-option *ngFor="let i of genreList" [value]="i.titre">{{i.titre}}</nb-option>
+                        <nb-select multiple placeholder="Liste des genres" formControlName="genres">
+                            <nb-option *ngFor="let i of genreList" [value]="i">{{i.titre}}</nb-option>
                         </nb-select>
                     </div>
                     <div class="input-group">

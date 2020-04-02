@@ -79,6 +79,7 @@ export class JeuComponent implements OnInit {
       })
 
     this.genreList = [];
+    this.genreServ.getAllGenre();
     this.genreServ.context$.subscribe(data => this.genreList = data);
     
     this.models = [];
