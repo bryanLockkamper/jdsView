@@ -32,6 +32,8 @@ export class JeuService {
   }
 
   insert(j: Jeu): Observable<Jeu> {
+    console.log(j);
+    
     return this.httpClient
       .post<Jeu>(environment.apiDomain + 'creerJeu', j)
       .pipe(finalize(() => this.getAllJeu()));

@@ -3,6 +3,8 @@ import { Jeu } from 'src/app/_models/jeu.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NbToastrService } from '@nebular/theme';
 import { JeuService } from 'src/app/_services/jeu.service';
+import { GenreService } from 'src/app/_services/genre.service';
+import { Genre } from 'src/app/_models/Genre.model';
 
 @Component({
   selector: 'app-jeu',
@@ -11,7 +13,8 @@ import { JeuService } from 'src/app/_services/jeu.service';
 })
 export class JeuComponent implements OnInit {
 
-  models : Jeu[]
+  genreList: Genre[];
+  models : Jeu[];
   j : Jeu;
   choix : number;
   currentJeu: Jeu;
@@ -22,7 +25,7 @@ export class JeuComponent implements OnInit {
   constructor(
     private jeuService : JeuService,
     private toastr: NbToastrService,
-
+    private genreServ : GenreService,
   ) { }
 
   ngOnInit(): void {
@@ -74,6 +77,9 @@ export class JeuComponent implements OnInit {
         null,
       ),
       })
+
+    this.genreList = [];
+    this.genreServ.context$.subscribe(data => this.genreList = data);
     
     this.models = [];
     this.jeuService.getAllJeu();
@@ -122,6 +128,7 @@ export class JeuComponent implements OnInit {
 
   add() {
     this.j = this.jeuForm.value
+  
     this.jeuService.insert(this.j)
       .subscribe(data => {
         this.toastr.success('Tout est Ok');

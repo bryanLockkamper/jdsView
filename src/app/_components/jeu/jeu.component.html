@@ -43,8 +43,9 @@
                                formControlName="nbrJoueurMax">
                     </div>
                     <div class="input-group">
-                        <input nbInput type="search" placeholder="genres"
-                               formControlName="genres">
+                        <nb-select multiple placeholder="Liste des genres" formControlName="genres">
+                            <nb-option *ngFor="let i of genreList" [value]="i">{{i.titre}} </nb-option>
+                        </nb-select>
                     </div>
                     <div class="input-group">
                         <input nbInput type="text" placeholder="maisonEdition"
@@ -85,8 +86,9 @@
                                formControlName="nbrJoueurMax">
                     </div>
                     <div class="input-group">
-                        <input nbInput type="search" placeholder="genres"
-                               formControlName="genres">
+                        <nb-select formControlName="genres">
+                            <nb-option *ngFor="let i of genreList" [value]="i.titre">{{i.titre}}</nb-option>
+                        </nb-select>
                     </div>
                     <div class="input-group">
                         <input nbInput type="text" placeholder="maisonEdition"
