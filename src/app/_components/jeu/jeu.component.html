@@ -1,1 +1,109 @@
-<p>jeu works!</p>
+<div style="display: flex;">
+    <div style="width: 100%;">
+        <nb-card>
+            <nb-card-body>
+                <nb-list>
+                    <nb-list-item *ngFor="let item of models">
+                        <div style="display: flex;">
+                            <div (click)="serv(item)" style="width: 100%;">
+                                <h4>{{item.titre}}</h4>
+                                <p>Description : {{item.description}}</p>
+                            </div>
+                            <div style="width: 20%;">
+                                <nb-icon icon="trash"
+                                    (click)="delete(item)"></nb-icon>    
+                            </div>
+                        </div>
+                    </nb-list-item>
+                </nb-list>
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <div style="width: 50%;">
+        <nb-card *ngIf="choix == 1">
+            <nb-card-header>
+                <h3>Création d'un jeu</h3>
+            </nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="jeuForm" (ngSubmit)="add()">
+                    <div class="input-group">
+                        <input nbInput type="text" placeholder="titre"
+                               formControlName="titre">
+                    </div>
+                    <div class="input-group">
+                        <input nbInput type="text" placeholder="description"
+                               formControlName="description">
+                    </div>
+                    <div class="input-group">
+                        <input nbInput type="number" placeholder="nbrJoueurMin"
+                               formControlName="nbrJoueurMin">
+                    </div>
+                    <div class="input-group">
+                        <input nbInput type="number" placeholder="nbrJoueurMax"
+                               formControlName="nbrJoueurMax">
+                    </div>
+                    <div class="input-group">
+                        <nb-select multiple placeholder="Liste des genres" formControlName="genres">
+                            <nb-option *ngFor="let i of genreList" [value]="i">{{i.titre}} </nb-option>
+                        </nb-select>
+                    </div>
+                    <div class="input-group">
+                        <input nbInput type="text" placeholder="maisonEdition"
+                               formControlName="maisonEdition">
+                    </div>
+                    <div class="input-group">
+                        <input nbInput type="number" placeholder="ageMin"
+                               formControlName="ageMin">
+                    </div>
+                    <div class="input-group">
+                        <input nbButton type="submit" value="Créer"
+                               [disabled]="jeuForm.invalid">
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+
+        <nb-card *ngIf="choix == 2">
+            <nb-card-header>
+                <h3>Modification d'un jeu</h3>
+            </nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="modifJeuForm" (ngSubmit)="update()">
+                    <div class="input-group">
+                        <input nbInput type="text"
+                               formControlName="titre">
+                    </div>
+                    <div class="input-group">
+                        <input nbInput type="text"
+                               formControlName="description">
+                    </div>
+                    <div class="input-group">
+                        <input nbInput type="number" placeholder="nbrJoueurMin"
+                               formControlName="nbrJoueurMin">
+                    </div>
+                    <div class="input-group">
+                        <input nbInput type="number" placeholder="nbrJoueurMax"
+                               formControlName="nbrJoueurMax">
+                    </div>
+                    <div class="input-group">
+                        <nb-select multiple placeholder="Liste des genres" formControlName="genres">
+                            <nb-option *ngFor="let i of genreList" [value]="i">{{i.titre}}</nb-option>
+                        </nb-select>
+                    </div>
+                    <div class="input-group">
+                        <input nbInput type="text" placeholder="maisonEdition"
+                               formControlName="maisonEdition">
+                    </div>
+                    <div class="input-group">
+                        <input nbInput type="number" placeholder="ageMin"
+                               formControlName="ageMin">
+                    </div>
+                    <div class="input-group">
+                        <input nbButton type="submit" value="Modifier"
+                               [disabled]="modifJeuForm.invalid">
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
