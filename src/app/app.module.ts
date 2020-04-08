@@ -15,6 +15,7 @@ import { AuthComponent } from './_components/auth/auth.component';
 import { JeuComponent } from './_components/jeu/jeu.component';
 import { GenreComponent } from './_components/genre/genre.component';
 import { RencontreComponent } from './_components/rencontre/rencontre.component';
+import { AddRencontreComponent } from './_components/rencontre/add-rencontre/add-rencontre.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { RencontreComponent } from './_components/rencontre/rencontre.component'
     JeuComponent,
     GenreComponent,
     RencontreComponent,
+    AddRencontreComponent,
   ],
   imports: [
     BrowserModule,
