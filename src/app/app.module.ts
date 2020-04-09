@@ -15,6 +15,7 @@ import { AuthComponent } from './_components/auth/auth.component';
 import { JeuComponent } from './_components/jeu/jeu.component';
 import { GenreComponent } from './_components/genre/genre.component';
 import { RencontreComponent } from './_components/rencontre/rencontre.component';
+import { SharedModule } from './_shared/shared.module';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { RencontreComponent } from './_components/rencontre/rencontre.component'
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
