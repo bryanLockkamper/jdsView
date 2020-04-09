@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Rencontre } from 'src/app/_models/rencontre.model';
+import { NbToastrService } from '@nebular/theme';
+import { RencontreService } from 'src/app/_services/rencontre.service';
 
 @Component({
   selector: 'app-rencontre',
@@ -7,9 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RencontreComponent implements OnInit {
 
-  constructor() { }
+  models : Rencontre[];
+
+  constructor(
+    private rencontreService : RencontreService,
+    private toastr: NbToastrService,
+  ) { 
+    
+  }
 
   ngOnInit(): void {
+    this.models = [];
+    this.rencontreService.getAllRencontre();
+    this.rencontreService.context$.subscribe(data => this.models = data);
   }
+
+  delete(toDelete : Rencontre){    
+    this.rencontreService.delete(toDelete)
+      .subscribe(() => {
+        this.toastr.success('La rencontre a été supprimé');
+      }, error => {
+        console.log(error);
+        this.toastr.danger('Une erreur est survenue');
+      });
+  } 
 
 }
