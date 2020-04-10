@@ -3,3 +3,24 @@
     <button nbButton (click)="addRencontre()"><nb-icon icon="plus-outline"></nb-icon></button>
   </nb-card-body>
 </nb-card>
+
+<div style="width: 100%;">
+    <nb-card>
+        <nb-card-body>
+            <nb-list>
+                <nb-list-item *ngFor="let item of models">
+                    <div style="display: flex;">
+                        <div style="width: 100%;">
+                            <h4>{{item.date}} : {{item.titre}}</h4>
+                            <p>Description : {{item.description}}</p>
+                        </div>
+                        <div style="width: 20%;">
+                            <nb-icon icon="trash"
+                                (click)="delete(item)"></nb-icon>
+                        </div>
+                    </div>
+                </nb-list-item>
+            </nb-list>
+        </nb-card-body>
+    </nb-card>
+</div>
