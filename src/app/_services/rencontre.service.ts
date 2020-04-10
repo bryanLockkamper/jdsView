@@ -16,7 +16,7 @@ export class RencontreService {
     return this._context$.asObservable();
   }
 
-  constructor(private httpClient : HttpClient) 
+  constructor(private httpClient : HttpClient)
   {
     this._context$ = new BehaviorSubject<Rencontre[]>([]);
   }
@@ -25,9 +25,15 @@ export class RencontreService {
     this.httpClient.get<Rencontre[]>(environment.apiDomain + 'rencontres').subscribe(data => this._context$.next(data));
   }
 
-  delete(g: Rencontre) : Observable<Rencontre> {    
+  delete(g: Rencontre) : Observable<Rencontre> {
     return this.httpClient
       .post<Rencontre>(environment.apiDomain + 'supprimerRencontre' ,  g.id
     ).pipe(finalize(() => this.getAllRencontre()));
+  }
+
+  create(g: Rencontre) : Observable<Rencontre> {
+    return this.httpClient
+      .post<Rencontre>(environment.apiDomain + 'creerRencontre' ,  g
+      ).pipe(finalize(() => this.getAllRencontre()));
   }
 }

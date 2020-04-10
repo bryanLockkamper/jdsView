@@ -44,7 +44,13 @@ export class RencontreComponent implements OnInit {
       closeOnEsc: true,
       context: undefined
       }).onClose.subscribe(value => {
-        //todo appeler le service pour enregistrer dans l'api
+        this.rencontreService.create(value).subscribe(
+          () => {
+            this.toastr.success('La rencontre a été crée');
+        }, error => {
+          console.log(error);
+          this.toastr.danger('Une erreur est survenue');
+        })
     })
   }
 }

@@ -32,18 +32,20 @@ export class AddRencontreComponent implements OnInit{
         codePostal: new FormControl(null, Validators.required),
         ville: new FormControl(null, Validators.required)
       }),
-      photo: new FormControl(null),
+      photo: new FormGroup({
+        lien: new FormControl(null)
+      })
     });
   }
 
   close(b: boolean) {
-    this.dialogRef.close(this.form);
+    this.dialogRef.close(this.form.value);
   }
 
   recupPhoto(files: any) {
     console.log(files);
     this.getBase64(files[0]).subscribe(value =>
-      this.form.get('photo').setValue(value)
+      this.form.get('photo').get('lien').setValue(value)
     )
   }
 
