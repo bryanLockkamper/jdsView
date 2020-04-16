@@ -32,6 +32,7 @@ export class RencontreService {
   }
 
   create(g: Rencontre) : Observable<Rencontre> {
+    console.log(g);
     return this.httpClient
       .post<Rencontre>(environment.apiDomain + 'creerRencontre' ,  g
       ).pipe(finalize(() => this.getAllRencontre()));
