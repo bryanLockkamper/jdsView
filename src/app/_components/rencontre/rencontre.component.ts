@@ -4,7 +4,6 @@ import {AddRencontreComponent} from "./add-rencontre/add-rencontre.component";
 import { Rencontre } from 'src/app/_models/rencontre.model';
 import { NbToastrService } from '@nebular/theme';
 import { RencontreService } from 'src/app/_services/rencontre.service';
-import {$e} from "codelyzer/angular/styles/chars";
 
 @Component({
   selector: 'app-rencontre',
@@ -14,6 +13,7 @@ import {$e} from "codelyzer/angular/styles/chars";
 export class RencontreComponent implements OnInit {
 
   models : Rencontre[];
+  actualTab;
 
   constructor(
     private rencontreService : RencontreService,
@@ -40,7 +40,6 @@ export class RencontreComponent implements OnInit {
   }
 
   addRencontre() {
-    console.log('tets');
     this.dialog.open(AddRencontreComponent, {
       closeOnBackdropClick: false,
       closeOnEsc: true,
@@ -58,14 +57,21 @@ export class RencontreComponent implements OnInit {
   }
 
   changeTab($event: any) {
-    switch ($event.tabTitle) {
-      case 'J\'ai créer':
-        break;
+    this.actualTab = $event.tabTitle
+  }
+
+  filter(item: Rencontre) {
+    switch (this.actualTab) {
       case 'Je participe':
-        console.log(localStorage.getItem('id'));
-        break;
+        for (let i = 0; i < item.utilisateurAffList.length; i++) {
+          if (item.utilisateurAffList[i].id == Number(localStorage.getItem('id')))
+            return true;
+        }
+        return false;
       case 'Je peux participer':
-        break;
+        return new Date(item.date) > new Date() && item.utilisateurCrea.id != Number(localStorage.getItem('id')) && item.utilisateurAffList.length < item.nbrParticipantLimite;
+      case "J\'ai créer":
+        return item.utilisateurCrea.id == Number(localStorage.getItem('id'));
     }
   }
 }

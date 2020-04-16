@@ -12,8 +12,8 @@ import { Utilisateur } from 'src/app/_models/utilisateur.model';
 export class ProfilsComponent implements OnInit {
 
   formGroup: FormGroup;
-  regex:RegExp
-  
+  regex:RegExp;
+
   utilisateur:Utilisateur;
 
   constructor(
@@ -23,8 +23,8 @@ export class ProfilsComponent implements OnInit {
   ngOnInit(){
 
     this.utilisateurservice.getMonProfil(1).subscribe(x => {
-      this.utilisateur = x
-
+      this.utilisateur = x;
+      console.log(this.utilisateur)
       this.regex =(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
       this.formGroup = new FormGroup({
         email : new FormControl('Exemple@test.com', Validators.compose([
