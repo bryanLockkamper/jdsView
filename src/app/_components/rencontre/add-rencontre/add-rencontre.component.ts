@@ -3,6 +3,8 @@ import {NbDialogRef, NbToastrService} from "@nebular/theme";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {$e} from "codelyzer/angular/styles/chars";
 import {Observable} from "rxjs";
+import {Jeu} from "../../../_models/jeu.model";
+import {JeuService} from "../../../_services/jeu.service";
 
 @Component({
   selector: 'app-add-rencontre',
@@ -12,13 +14,18 @@ import {Observable} from "rxjs";
 export class AddRencontreComponent implements OnInit {
 
   form: FormGroup;
+  jeuList : Jeu[];
 
   constructor(
     protected dialogRef: NbDialogRef<AddRencontreComponent>,
+    private jeuService : JeuService,
   ) {
   }
 
   ngOnInit(): void {
+    this.jeuList = [];
+    this.jeuService.getAllJeu();
+    this.jeuService.context$.subscribe(data => this.jeuList = data);
     this.form = new FormGroup({
       titre: new FormControl(null, Validators.required),
       date: new FormControl(null, Validators.required),
@@ -34,16 +41,13 @@ export class AddRencontreComponent implements OnInit {
       }),
       photo: new FormGroup({
         lien: new FormControl(null)
-      })
+      }),
+      jeuList: new FormControl(null, Validators.required)
     });
   }
 
   close(b: boolean) {
     if (b) {
-      console.log(this.form.value);
-      /*let dateTimeAll = (this.form.get('date').value + '').split(' ');
-      dateTimeAll[4] = this.form.get('time').value + ':00';
-      this.form.get('date').setValue(Date.parse(dateTimeAll.join(' ')));*/
       this.form.get('date').value.setHours(Number(this.form.get('time').value.toString().split(':')[0]) + 2);
       this.form.get('date').value.setMinutes(this.form.get('time').value.toString().split(':')[1]);
       this.dialogRef.close(this.form.value)
@@ -51,7 +55,6 @@ export class AddRencontreComponent implements OnInit {
   }
 
   recupPhoto(files: any) {
-    console.log(files);
     this.getBase64(files[0]).subscribe(value =>
       this.form.get('photo').get('lien').setValue(value)
     )

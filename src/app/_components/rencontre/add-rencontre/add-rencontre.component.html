@@ -13,6 +13,9 @@
     <input nbInput type="number" formControlName="codePostal" placeholder="Code postal">
     <input nbInput type="text" formControlName="ville" placeholder="Localité">
   </div>
+  <nb-select multiple placeholder="Liste des jeux" formControlName="jeuList">
+    <nb-option *ngFor="let i of jeuList" [value]="i">{{i.titre}} </nb-option>
+  </nb-select>
   <input nbInput type="file" placeholder="Photo" (change)="recupPhoto($event.target.files)">
   <div formGroupName="photo"><input nbInput type="text" formControlName="lien" hidden></div>
   <input nbButton type="submit" value="Annuler" (click)="close(false)">
