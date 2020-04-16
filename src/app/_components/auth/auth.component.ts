@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/_services/auth.service';
 import { NbToastrService } from '@nebular/theme';
 import { Router } from '@angular/router';
+import { customValidators } from 'src/app/_shared/validators/custome-validators';
 
 @Component({
   selector: 'app-auth',
@@ -66,6 +67,7 @@ export class AuthComponent implements OnInit {
         Validators.compose([
           Validators.required,
           Validators.max(30),
+          customValidators.compare('password','confirm')
         ])
       ),
       'pseudo': new FormControl(

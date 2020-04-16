@@ -2,6 +2,7 @@ import { Jeu } from './jeu.model';
 import { Adresse } from './adresse.model';
 import { Photo } from './photo.model';
 import { Rencontre } from './rencontre.model';
+import { Role } from './role.model';
 
 export interface Utilisateur {
     id:number;
@@ -18,4 +19,5 @@ export interface Utilisateur {
     photo:Photo;
     rencontreAffList:Rencontre[];
     rencontreCreaList:Rencontre[];
+    roles:Role[];
 }
