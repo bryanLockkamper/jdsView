@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NbDialogRef, NbToastrService} from "@nebular/theme";
+import {NbDateService, NbDialogRef, NbToastrService} from "@nebular/theme";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {$e} from "codelyzer/angular/styles/chars";
 import {Observable} from "rxjs";
@@ -14,15 +14,18 @@ import {JeuService} from "../../../_services/jeu.service";
 export class AddRencontreComponent implements OnInit {
 
   form: FormGroup;
-  jeuList : Jeu[];
+  jeuList: Jeu[];
+  min: Date;
 
   constructor(
     protected dialogRef: NbDialogRef<AddRencontreComponent>,
-    private jeuService : JeuService,
+    private jeuService: JeuService,
+    private dateService: NbDateService<Date>
   ) {
   }
 
   ngOnInit(): void {
+    this.min = this.dateService.today();
     this.jeuList = [];
     this.jeuService.getAllJeu();
     this.jeuService.context$.subscribe(data => this.jeuList = data);
@@ -48,8 +51,13 @@ export class AddRencontreComponent implements OnInit {
 
   close(b: boolean) {
     if (b) {
-      this.form.get('date').value.setHours(Number(this.form.get('time').value.toString().split(':')[0]) + 2);
-      this.form.get('date').value.setMinutes(this.form.get('time').value.toString().split(':')[1]);
+      this.form.get('date').setValue(this.form.get('date').value.getFullYear()
+        + '-'
+        + ((this.form.get('date').value.getMonth() < 10) ? ('0' + this.form.get('date').value.getMonth()) : (this.form.get('date').value.getMonth()))
+        + '-'
+        + this.form.get('date').value.getDate()
+        + 'T'
+        + this.form.get('time').value + ':00');
       this.dialogRef.close(this.form.value)
     } else this.dialogRef.close('cancel');
   }
