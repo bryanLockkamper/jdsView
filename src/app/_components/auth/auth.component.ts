@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/_services/auth.service';
 import { NbToastrService } from '@nebular/theme';
 import { Router } from '@angular/router';
+import { customValidators } from 'src/app/_shared/validators/custome-validators';
 
 @Component({
   selector: 'app-auth',
@@ -66,6 +67,7 @@ export class AuthComponent implements OnInit {
         Validators.compose([
           Validators.required,
           Validators.max(30),
+          customValidators.compare('password','confirm')
         ])
       ),
       'pseudo': new FormControl( 
@@ -88,7 +90,7 @@ export class AuthComponent implements OnInit {
         this.toastrService.info('Connecté! Bienvenue sur notre site !!')
         //message de success
         //rediriger le user
-        this.router.navigateByUrl('/default/home');
+        this.router.navigateByUrl('/home');
       }, error => {
         console.log(error);
         this.toastrService.danger('Login ou mdp incorrect!!')
@@ -103,7 +105,7 @@ export class AuthComponent implements OnInit {
       this.toastrService.info('Enregistré! Bienvenue sur notre site !!')
       //message de success
       //rediriger le user
-      this.router.navigateByUrl('/default/home');
+      this.router.navigateByUrl('/home');
     }, error => {
       console.log(error);
       this.toastrService.danger('Login ou mdp incorrect!!')

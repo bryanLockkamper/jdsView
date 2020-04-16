@@ -32,11 +32,13 @@
                     <form [formGroup]="registerForm" (ngSubmit)="register()">
                         <div class="input-group">
                             <input nbInput type="email" placeholder="email"
-                                   formControlName="email">
+                                   formControlName="email"
+                                   [status]="registerForm.get('email') | inputColor">
                         </div>
                         <div class="input-group">
                             <input nbInput type="password" placeholder="password"
-                                   formControlName="password">
+                                   formControlName="password"
+                                   [status]="registerForm.get('password') | inputColor">
                         </div>
                         <div class="input-group">
                             <input nbInput type="password" placeholder="confirmpassword"

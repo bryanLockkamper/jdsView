@@ -15,6 +15,7 @@ export class ProfilsComponent implements OnInit {
   regex:RegExp
   
   utilisateur:Utilisateur;
+  urilisateurTest:Utilisateur;
 
   constructor(
     private utilisateurservice:UtilisateurService
@@ -24,6 +25,7 @@ export class ProfilsComponent implements OnInit {
 
     this.utilisateurservice.getMonProfil(1).subscribe(x => {
       this.utilisateur = x
+      this.urilisateurTest = x
 
       this.regex =(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
       this.formGroup = new FormGroup({
@@ -62,6 +64,7 @@ export class ProfilsComponent implements OnInit {
         customValidators.compare('password','confirm')
       ]));
     });
+    
   }
 
   onSubmit(){
@@ -77,6 +80,7 @@ export class ProfilsComponent implements OnInit {
     this.utilisateur.numero = this.formGroup.value.numero;
     this.utilisateur.photo = this.formGroup.value.photo;
     this.utilisateurservice.getSaveMonProfil(this.utilisateur).subscribe();
+    console.log(this.urilisateurTest);
   }
 
 }
