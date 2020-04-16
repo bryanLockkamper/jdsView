@@ -95,7 +95,7 @@ export class AuthComponent implements OnInit {
         this.toastrService.danger('Login ou mdp incorrect!!')
         //message d'erreur
       });
-  }
+  } 
 
   register() {
     this.authService.register(this.registerForm.value).subscribe(token => {
