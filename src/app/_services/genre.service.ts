@@ -17,7 +17,7 @@ export class GenreService {
     return this._context$.asObservable();
   }
 
-  constructor(private httpClient : HttpClient) 
+  constructor(private httpClient : HttpClient)
   {
     this._context$ = new BehaviorSubject<Genre[]>([]);
   }
@@ -26,7 +26,7 @@ export class GenreService {
     this.httpClient.get<Genre[]>(environment.apiDomain + 'genres').subscribe(data => this._context$.next(data));
   }
 
-  delete(g: Genre) : Observable<Genre> {    
+  delete(g: Genre) : Observable<Genre> {
     return this.httpClient
       .post<Genre>(environment.apiDomain + 'supprimerGenre' ,  g
     ).pipe(finalize(() => this.getAllGenre()));
@@ -38,7 +38,7 @@ export class GenreService {
       .pipe(finalize(() => this.getAllGenre()));
   }
 
-  update(g: Genre) {    
+  update(g: Genre) {
     return this.httpClient
     .post<Genre>(environment.apiDomain + 'modifierGenre' , g)
     .pipe(finalize(() => this.getAllGenre()));
