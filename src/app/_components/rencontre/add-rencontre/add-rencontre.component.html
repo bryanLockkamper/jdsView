@@ -1,0 +1,20 @@
+<form [formGroup]="form" (ngSubmit)="close(true)">
+  <input nbInput type="text" name="titre" placeholder="Titre" formControlName="titre">
+  <input nbInput [nbDatepicker]="datepicker" placeholder="Date de la rencontre" name="date" formControlName="date">
+  <nb-datepicker #datepicker></nb-datepicker>
+  <input nbInput type="time" formControlName="heure" placeholder="Heure de début">
+  <input nbInput type="number" formControlName="tempsDeJeu" min="0" placeholder="Temps de jeu estimé en heures">
+  <input nbInput type="number" formControlName="nbrParticipantLimite" min="0"
+         placeholder="Nombre de participants maximum">
+  <input nbInput type="text" formControlName="description" placeholder="Description">
+  <div formGroupName="adresse">
+    <input nbInput type="text" formControlName="rue" placeholder="Rue">
+    <input nbInput type="text" formControlName="numero" placeholder="Numéro">
+    <input nbInput type="number" formControlName="codePostal" placeholder="Code postal">
+    <input nbInput type="text" formControlName="ville" placeholder="Localité">
+  </div>
+  <input nbInput type="file" placeholder="Photo" (change)="recupPhoto($event.target.files)">
+  <div formGroupName="photo"><input nbInput type="text" formControlName="lien" hidden></div>
+  <input nbButton type="submit" value="Annuler" (click)="close(false)">
+  <input nbButton type="submit" value="Créer" [disabled]="form.invalid">
+</form>
