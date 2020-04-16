@@ -3,11 +3,97 @@
 </div>
 <div>
     <section>
-        <img>
+        <img src="">
     </section>
     <section>
-        <p></p>
-        <p></p>
-        <p></p>
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+            <div>
+                <label for="">Pseudo :</label>
+                <input 
+                    nbInput 
+                    type="text" 
+                    formControlName="pseudo"
+                    [status]="formGroup.get('pseudo') | inputColor"
+                >
+            </div>
+
+            <div>
+                <label for="">Photo de profil</label>
+                <input 
+                    nbInput 
+                    type="file" 
+                    formControlName="photo"
+                    [status]="formGroup.get('photo') | inputColor"
+                >
+            </div>
+
+            <div>
+                <label for="">email: </label>
+                <input 
+                    nbInput 
+                    type="text" 
+                    formControlName="email"
+                    [status]="formGroup.get('email') | inputColor"
+                >
+            </div>
+
+            <div>
+                <label for="">date de Naissance: </label>
+                <input 
+                    nbInput 
+                    type="date" 
+                    formControlName="dateNaissance"
+                    [status]="formGroup.get('dateNaissance') | inputColor"
+                >
+            </div>
+
+            <div>
+                <label for="">genre: </label>
+                <input 
+                    nbInput 
+                    type="text" 
+                    formControlName="genre"
+                    [status]="formGroup.get('genre') | inputColor"
+                    >
+            </div>
+
+            <div>
+                <label for="">nom: </label>
+                <input 
+                    nbInput 
+                    type="text" 
+                    formControlName="nom"
+                    [status]="formGroup.get('nom') | inputColor"
+                >
+            </div>
+            <div>
+                <label for="">prenom: </label>
+                <input 
+                    nbInput 
+                    type="text" 
+                    formControlName="prenom"
+                    [status]="formGroup.get('prenom') | inputColor"
+                >
+            </div>
+            <div>
+                <label for="">numero:</label>
+                <input 
+                    nbInput 
+                    type="text" 
+                    formControlName="numero"
+                    [status]="formGroup.get('numero') | inputColor"
+                >
+            </div>
+            <div>
+                <label for="">description: </label>
+                <input 
+                 nbInput 
+                    type="text" 
+                    formControlName="description"
+                    [status]="formGroup.get('description') | inputColor"
+                >
+            </div>
+            <input nbButton type="submit" [disabled]="!formGroup.valid">
+        </form>
     </section>
 </div>
