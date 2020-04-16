@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {NbDialogService} from "@nebular/theme";
+import {NbDialogService, NbMenuItem} from "@nebular/theme";
 import {AddRencontreComponent} from "./add-rencontre/add-rencontre.component";
 import { Rencontre } from 'src/app/_models/rencontre.model';
 import { NbToastrService } from '@nebular/theme';
 import { RencontreService } from 'src/app/_services/rencontre.service';
+import {$e} from "codelyzer/angular/styles/chars";
 
 @Component({
   selector: 'app-rencontre',
@@ -39,6 +40,7 @@ export class RencontreComponent implements OnInit {
   }
 
   addRencontre() {
+    console.log('tets');
     this.dialog.open(AddRencontreComponent, {
       closeOnBackdropClick: false,
       closeOnEsc: true,
@@ -53,5 +55,17 @@ export class RencontreComponent implements OnInit {
           this.toastr.danger('Une erreur est survenue');
         })
     })
+  }
+
+  changeTab($event: any) {
+    switch ($event.tabTitle) {
+      case 'J\'ai créer':
+        break;
+      case 'Je participe':
+        console.log(localStorage.getItem('id'));
+        break;
+      case 'Je peux participer':
+        break;
+    }
   }
 }
