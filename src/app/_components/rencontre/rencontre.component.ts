@@ -44,6 +44,7 @@ export class RencontreComponent implements OnInit {
       closeOnEsc: true,
       context: undefined
       }).onClose.subscribe(value => {
+        if (value != 'cancel')
         this.rencontreService.create(value).subscribe(
           () => {
             this.toastr.success('La rencontre a été crée');
