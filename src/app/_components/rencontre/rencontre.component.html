@@ -23,12 +23,18 @@
             <p>Description : {{item.description}}</p>
           </div>
           <div style="width: 20%;">
-            <nb-icon icon="trash"
-                     (click)="delete(item)"></nb-icon>
-            <nb-icon icon="plus-outline" *ngIf="actualTab=='Je peux participer'"
-                     (click)="inscription(item)"></nb-icon>
-            <nb-icon icon="minus-outline" *ngIf="actualTab=='Je participe'"
-                     (click)="desinscription(item)"></nb-icon>
+            <button nbButton (click)="delete(item)">
+              <nb-icon icon="trash"
+              ></nb-icon>
+            </button>
+            <button nbButton *ngIf="actualTab=='Je peux participer'"
+                    (click)="inscription(item)">
+              <nb-icon icon="plus-outline"></nb-icon>
+            </button>
+            <button nbButton *ngIf="actualTab=='Je participe'"
+                    (click)="desinscription(item)">
+              <nb-icon icon="minus-outline"></nb-icon>
+            </button>
           </div>
         </div>
       </nb-list-item>

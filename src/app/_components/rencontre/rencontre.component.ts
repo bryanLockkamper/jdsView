@@ -76,11 +76,7 @@ export class RencontreComponent implements OnInit {
             && item.utilisateurAffList.find(value => value.id != Number(localStorage.getItem('id')))) {
             return true;
           }
-          else if (item.utilisateurAffList.length == 0) {
-            return true;
-          } else {
-            return false;
-          }
+          else return item.utilisateurAffList.length == 0;
         }
         return false;
       case "J\'ai créer":
