@@ -32,9 +32,14 @@ export class RencontreService {
   }
 
   create(g: Rencontre) : Observable<Rencontre> {
-    console.log(g)
     return this.httpClient
       .post<Rencontre>(environment.apiDomain + 'creerRencontre' ,  g
+      ).pipe(finalize(() => this.getAllRencontre()));
+  }
+
+  modifier(g: Rencontre) : Observable<Rencontre> {
+    return this.httpClient
+      .post<Rencontre>(environment.apiDomain + 'modifierRencontre' ,  g
       ).pipe(finalize(() => this.getAllRencontre()));
   }
 }

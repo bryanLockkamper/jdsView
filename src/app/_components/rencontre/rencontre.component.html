@@ -25,6 +25,10 @@
           <div style="width: 20%;">
             <nb-icon icon="trash"
                      (click)="delete(item)"></nb-icon>
+            <nb-icon icon="plus-outline" *ngIf="actualTab=='Je peux participer'"
+                     (click)="inscription(item)"></nb-icon>
+            <nb-icon icon="minus-outline" *ngIf="actualTab=='Je participe'"
+                     (click)="desinscription(item)"></nb-icon>
           </div>
         </div>
       </nb-list-item>
