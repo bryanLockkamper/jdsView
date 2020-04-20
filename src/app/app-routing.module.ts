@@ -6,6 +6,7 @@ import { AuthComponent } from './_components/auth/auth.component';
 import { JeuComponent } from './_components/jeu/jeu.component';
 import { RencontreComponent } from './_components/rencontre/rencontre.component';
 import { GenreComponent } from './_components/genre/genre.component';
+import { JeuPrefereComponent } from './_components/jeu-prefere/jeu-prefere.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'jeu', component: JeuComponent },
   { path: 'rencontre', component: RencontreComponent },
   { path: 'genre', component: GenreComponent },
+  { path: 'jeu-prefere', component: JeuPrefereComponent },
 ];
 
 @NgModule({

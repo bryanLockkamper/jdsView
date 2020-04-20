@@ -21,7 +21,7 @@ export class NavComponent implements OnInit {
       { title: 'Jeux', icon: 'save', link: '/jeu' },
       { title: 'Rencontres', icon: 'people', link: '/rencontre' },
       { title: 'Genres', icon: 'folder', link: '/genre' },
-     
+      { title: 'jeu-préféré', icon: 'folder', link: '/jeu-prefere' },
     ]
   }
 
