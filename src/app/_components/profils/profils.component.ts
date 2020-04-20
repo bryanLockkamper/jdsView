@@ -13,8 +13,8 @@ import { Observable } from 'rxjs';
 export class ProfilsComponent implements OnInit {
 
   formGroup: FormGroup;
-  regex:RegExp
-  
+  regex:RegExp;
+
   utilisateur:Utilisateur;
 
   constructor(
@@ -24,7 +24,7 @@ export class ProfilsComponent implements OnInit {
   ngOnInit(){
 
     this.utilisateurservice.getMonProfil(1).subscribe(x => {
-      this.utilisateur = x
+      this.utilisateur = x;
 
       this.regex =(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
       this.formGroup = new FormGroup({

@@ -6,7 +6,23 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './_components/nav/nav.component';
 import { HomeComponent } from './_components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbCardModule, NbInputModule, NbSidebarModule, NbMenuModule, NbButtonModule, NbDatepickerModule, NbSelectModule, NbDialogModule, NbToastrModule, NbListModule, NbActionsModule, NbIconModule } from '@nebular/theme';
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbCardModule,
+  NbInputModule,
+  NbSidebarModule,
+  NbMenuModule,
+  NbButtonModule,
+  NbDatepickerModule,
+  NbSelectModule,
+  NbDialogModule,
+  NbToastrModule,
+  NbListModule,
+  NbActionsModule,
+  NbIconModule,
+  NbTabsetModule, NbRouteTabsetModule
+} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
@@ -37,7 +53,7 @@ import { JeuPrefereComponent } from './_components/jeu-prefere/jeu-prefere.compo
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({ name: 'cosmic' }),
+    NbThemeModule.forRoot({name: 'cosmic'}),
     NbLayoutModule,
     NbEvaIconsModule,
     NbCardModule,
@@ -57,6 +73,7 @@ import { JeuPrefereComponent } from './_components/jeu-prefere/jeu-prefere.compo
     HttpClientModule,
     FormsModule,
     SharedModule,
+    NbTabsetModule
   ],
   providers: [],
   bootstrap: [AppComponent]

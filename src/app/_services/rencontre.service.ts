@@ -22,7 +22,7 @@ export class RencontreService {
   }
 
   getAllRencontre():void{
-    this.httpClient.get<Rencontre[]>(environment.apiDomain + 'rencontres').subscribe(data => this._context$.next(data));
+    this.httpClient.get<Rencontre[]>(environment.apiDomain + 'actualRencontres').subscribe(data => this._context$.next(data));
   }
 
   delete(g: Rencontre) : Observable<Rencontre> {
@@ -34,6 +34,12 @@ export class RencontreService {
   create(g: Rencontre) : Observable<Rencontre> {
     return this.httpClient
       .post<Rencontre>(environment.apiDomain + 'creerRencontre' ,  g
+      ).pipe(finalize(() => this.getAllRencontre()));
+  }
+
+  modifier(g: Rencontre) : Observable<Rencontre> {
+    return this.httpClient
+      .post<Rencontre>(environment.apiDomain + 'modifierRencontre' ,  g
       ).pipe(finalize(() => this.getAllRencontre()));
   }
 }
