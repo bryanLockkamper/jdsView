@@ -15,10 +15,10 @@ import { UtilisateurService } from 'src/app/_services/utilisateur.service';
 })
 export class AuthComponent implements OnInit {
 
-  loginForm: FormGroup
-  registerForm: FormGroup
+  loginForm: FormGroup;
+  registerForm: FormGroup;
 
-  isRegistered: number
+  isRegistered: number;
   user: Utilisateur;
 
   constructor(
@@ -90,9 +90,7 @@ export class AuthComponent implements OnInit {
   login() {
     this.authService.login(this.loginForm.value)
       .subscribe(token => {
-        //====> Todo: gestion Token
-        localStorage.setItem('id', token['id']);
-        localStorage.setItem('TOKEN', token);
+        localStorage.setItem('token', JSON.stringify(token['token']));
         this.toastrService.info('Connecté! Bienvenue sur notre site !!');
         //message de success
         //rediriger le user
@@ -102,12 +100,11 @@ export class AuthComponent implements OnInit {
         this.toastrService.danger('Login ou mdp incorrect!!')
         //message d'erreur
       });
-  } 
+  }
 
   register() {
     this.authService.register(this.registerForm.value).subscribe(token => {
-      //====> Todo: gestion Token
-      localStorage.setItem('TOKEN', token);
+      localStorage.setItem('token', JSON.stringify(token['token']));
       this.toastrService.info('Enregistré! Bienvenue sur notre site !!');
       //message de success
       //rediriger le user

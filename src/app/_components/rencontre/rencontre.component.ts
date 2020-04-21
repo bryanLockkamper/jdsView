@@ -4,6 +4,7 @@ import {AddRencontreComponent} from "./add-rencontre/add-rencontre.component";
 import {Rencontre} from 'src/app/_models/rencontre.model';
 import {NbToastrService} from '@nebular/theme';
 import {RencontreService} from 'src/app/_services/rencontre.service';
+import * as decode from 'jwt-decode';
 
 @Component({
   selector: 'app-rencontre',
@@ -14,6 +15,7 @@ export class RencontreComponent implements OnInit {
 
   models: Rencontre[];
   actualTab;
+  idUtilisateur = decode(localStorage.getItem('token')).userInfo.id;
 
   constructor(
     private rencontreService: RencontreService,
@@ -64,23 +66,23 @@ export class RencontreComponent implements OnInit {
     switch (this.actualTab) {
       case 'Je participe':
         for (let i = 0; i < item.utilisateurAffList.length; i++) {
-          if (item.utilisateurAffList[i].id == Number(localStorage.getItem('id')))
+          if (item.utilisateurAffList[i].id == this.idUtilisateur)
             return true;
         }
         return false;
       case 'Je peux participer':
         if (new Date(item.date) > new Date()
-          && item.utilisateurCrea.id != Number(localStorage.getItem('id'))
+          && item.utilisateurCrea.id != this.idUtilisateur
           && item.utilisateurAffList.length < item.nbrParticipantLimite) {
           if (item.utilisateurAffList.length > 0
-            && item.utilisateurAffList.find(value => value.id != Number(localStorage.getItem('id')))) {
+            && item.utilisateurAffList.find(value => value.id != this.idUtilisateur)) {
             return true;
           }
           else return item.utilisateurAffList.length == 0;
         }
         return false;
       case "J\'ai créer":
-        return item.utilisateurCrea.id == Number(localStorage.getItem('id'));
+        return item.utilisateurCrea.id == this.idUtilisateur;
     }
   }
 
@@ -100,7 +102,7 @@ export class RencontreComponent implements OnInit {
       rencontreAffList: [],
       rencontreCreaList: [],
       roles: [],
-      id: Number(localStorage.getItem('id'))
+      id: this.idUtilisateur
     });
     this.rencontreService.modifier(item).subscribe(
       () => {
@@ -113,7 +115,7 @@ export class RencontreComponent implements OnInit {
   }
 
   desinscription(item: Rencontre) {
-    item.utilisateurAffList = item.utilisateurAffList.filter(value => value.id != Number(localStorage.getItem('id')));
+    item.utilisateurAffList = item.utilisateurAffList.filter(value => value.id != this.idUtilisateur);
     this.rencontreService.modifier(item).subscribe(
       () => {
         this.toastr.success('Vous êtes désinscrit');

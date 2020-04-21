@@ -19,7 +19,6 @@ export class UtilisateurService {
     );
   }
   getSaveMonProfil(utilisateur: Utilisateur){
-    console.log('tata');
     return this.httpClient.post(
       environment.apiDomain + '/modifierUtilisateur',utilisateur
     );
