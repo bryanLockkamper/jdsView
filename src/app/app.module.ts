@@ -34,6 +34,7 @@ import { RencontreComponent } from './_components/rencontre/rencontre.component'
 import { SharedModule } from './_shared/shared.module';
 import { AddRencontreComponent } from './_components/rencontre/add-rencontre/add-rencontre.component';
 import { JeuPrefereComponent } from './_components/jeu-prefere/jeu-prefere.component';
+import { MessageComponent } from './_components/message/message.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { JeuPrefereComponent } from './_components/jeu-prefere/jeu-prefere.compo
     RencontreComponent,
     AddRencontreComponent,
     JeuPrefereComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,

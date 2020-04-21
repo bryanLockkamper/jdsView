@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginModel } from '../_models/login.model';
 import { RegisterModel } from '../_models/register.models';
+import * as decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
