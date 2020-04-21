@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { NbToastrService } from '@nebular/theme';
 import { Router } from '@angular/router';
 import { customValidators } from 'src/app/_shared/validators/custome-validators';
+import * as decode from 'jwt-decode';
 
 @Component({
   selector: 'app-auth',
@@ -12,10 +13,10 @@ import { customValidators } from 'src/app/_shared/validators/custome-validators'
 })
 export class AuthComponent implements OnInit {
 
-  loginForm: FormGroup
-  registerForm: FormGroup
+  loginForm: FormGroup;
+  registerForm: FormGroup;
 
-  isRegistered: number
+  isRegistered: number;
 
   constructor(
     private authService: AuthService,
@@ -85,9 +86,7 @@ export class AuthComponent implements OnInit {
   login() {
     this.authService.login(this.loginForm.value)
       .subscribe(token => {
-        //====> Todo: gestion Token
-        localStorage.setItem('id', token['id']);
-        localStorage.setItem('TOKEN', token);
+        localStorage.setItem('token', JSON.stringify(token['token']));
         this.toastrService.info('Connecté! Bienvenue sur notre site !!');
         //message de success
         //rediriger le user
@@ -97,12 +96,11 @@ export class AuthComponent implements OnInit {
         this.toastrService.danger('Login ou mdp incorrect!!')
         //message d'erreur
       });
-  } 
+  }
 
   register() {
     this.authService.register(this.registerForm.value).subscribe(token => {
-      //====> Todo: gestion Token
-      localStorage.setItem('TOKEN', token);
+      localStorage.setItem('token', JSON.stringify(token['token']));
       this.toastrService.info('Enregistré! Bienvenue sur notre site !!');
       //message de success
       //rediriger le user
