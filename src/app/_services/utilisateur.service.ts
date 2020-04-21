@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UtilisateurService {
 
+
   constructor(
     private httpClient: HttpClient
   ) { }
@@ -18,6 +19,7 @@ export class UtilisateurService {
       environment.apiDomain + 'utilisateur/'+id
     );
   }
+  
   getSaveMonProfil(utilisateur: Utilisateur){
     return this.httpClient.post(
       environment.apiDomain + '/modifierUtilisateur',utilisateur

@@ -4,6 +4,7 @@ import { customValidators } from 'src/app/_shared/validators/custome-validators'
 import { UtilisateurService } from 'src/app/_services/utilisateur.service';
 import { Utilisateur } from 'src/app/_models/utilisateur.model';
 import { Observable } from 'rxjs';
+import * as decode from 'jwt-decode';
 
 @Component({
   selector: 'app-profils',
@@ -23,7 +24,7 @@ export class ProfilsComponent implements OnInit {
 
   ngOnInit(){
 
-    this.utilisateurservice.getMonProfil(1).subscribe(x => {
+    this.utilisateurservice.getMonProfil(decode(localStorage.getItem('token')).userInfo.id).subscribe(x => {
       this.utilisateur = x;
 
       this.regex =(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
