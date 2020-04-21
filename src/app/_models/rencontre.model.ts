@@ -14,4 +14,5 @@ export interface Rencontre {
     photo:Photo;
     jeuList:Jeu[];
     utilisateurCrea:Utilisateur;
+    utilisateurAffList:Utilisateur[];
 }

@@ -37,7 +37,7 @@ export class AuthComponent implements OnInit {
           Validators.required,
           Validators.email,
           Validators.max(255)
-        ]) 
+        ])
       ),
       'password': new FormControl(
         null,
@@ -55,7 +55,7 @@ export class AuthComponent implements OnInit {
           Validators.required,
           Validators.email,
           Validators.max(255)
-        ]) 
+        ])
       ),
       'password': new FormControl(
         null,
@@ -74,10 +74,10 @@ export class AuthComponent implements OnInit {
           customValidators.compare('password','confirm')
         ])
       ),
-      'pseudo': new FormControl( 
+      'pseudo': new FormControl(
         null,
         Validators.required,
-        
+
         ),
       'dateNaissance': new FormControl(
         null,
@@ -90,8 +90,9 @@ export class AuthComponent implements OnInit {
     this.authService.login(this.loginForm.value)
       .subscribe(token => {
         //====> Todo: gestion Token
+        localStorage.setItem('id', token['id']);
         localStorage.setItem('TOKEN', token);
-        this.toastrService.info('Connecté! Bienvenue sur notre site !!')
+        this.toastrService.info('Connecté! Bienvenue sur notre site !!');
         //message de success
         //rediriger le user
         this.router.navigateByUrl('/home');
@@ -102,11 +103,11 @@ export class AuthComponent implements OnInit {
       });
   } 
 
-  register() {    
+  register() {
     this.authService.register(this.registerForm.value).subscribe(token => {
       //====> Todo: gestion Token
       localStorage.setItem('TOKEN', token);
-            this.toastrService.info('Enregistré! Bienvenue sur notre site !!')
+      this.toastrService.info('Enregistré! Bienvenue sur notre site !!');
       //message de success
       //rediriger le user
       this.router.navigateByUrl('/home');

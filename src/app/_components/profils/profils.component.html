@@ -1,99 +1,101 @@
-<div>
-    <p>Mon profil</p>
-</div>
-<div>
-    <section>
-        <img src="">
-    </section>
-    <section>
-        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-            <div>
-                <label for="">Pseudo :</label>
-                <input 
-                    nbInput 
-                    type="text" 
-                    formControlName="pseudo"
-                    [status]="formGroup.get('pseudo') | inputColor"
-                >
-            </div>
+<nb-card>
+    <nb-card-header>
+        <div>
+            <p>Mon profil</p>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <div>
+            <section>
+                <img src="">
+            </section>
+            <section>
+                <form *ngIf="utilisateur != null" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+                    <div>
+                        <label for="">Pseudo :</label>
+                        <input 
+                            nbInput 
+                            type="text" 
+                            formControlName="pseudo"
+                            [status]="formGroup.get('pseudo') | inputColor"
+                        >
+                    </div>
 
-            <div>
-                <label for="">Photo de profil</label>
-                <input 
-                    nbInput 
-                    type="file" 
-                    formControlName="photo"
-                    [status]="formGroup.get('photo') | inputColor"
-                >
-            </div>
+                    <div>
+                        <label for="">Photo de profil</label>
+                        <input 
+                            nbInput 
+                            type="file" 
+                            [status]="formGroup.get('photo') | inputColor"
+                            (change)="recupPhoto($event.target.files)"
+                        >
+                    </div>
+                    <img [src]="utilisateur.photo?.lien">
+                    <div formGroupName="photo"><input nbInput type="text" formControlName="lien" hidden></div>
 
-            <div>
-                <label for="">email: </label>
-                <input 
-                    nbInput 
-                    type="text" 
-                    formControlName="email"
-                    [status]="formGroup.get('email') | inputColor"
-                >
-            </div>
+                    <div>
+                        <label for="">email: </label>
+                        <input 
+                            nbInput 
+                            type="text" 
+                            formControlName="email"
+                            [status]="formGroup.get('email') | inputColor"
+                        >
+                    </div>
 
-            <div>
-                <label for="">date de Naissance: </label>
-                <input 
-                    nbInput 
-                    type="date" 
-                    formControlName="dateNaissance"
-                    [status]="formGroup.get('dateNaissance') | inputColor"
-                >
-            </div>
+                    <div>
+                        <p> Date de naissance :{{utilisateur.dateNaissance}}</p>
+                    </div>
 
-            <div>
-                <label for="">genre: </label>
-                <input 
-                    nbInput 
-                    type="text" 
-                    formControlName="genre"
-                    [status]="formGroup.get('genre') | inputColor"
-                    >
-            </div>
+                    <div>
+                        <label for="">genre: </label>
+                        <input 
+                            nbInput 
+                            type="text" 
+                            formControlName="genre"
+                            [status]="formGroup.get('genre') | inputColor"
+                            >
+                    </div>
 
-            <div>
-                <label for="">nom: </label>
-                <input 
-                    nbInput 
-                    type="text" 
-                    formControlName="nom"
-                    [status]="formGroup.get('nom') | inputColor"
-                >
-            </div>
-            <div>
-                <label for="">prenom: </label>
-                <input 
-                    nbInput 
-                    type="text" 
-                    formControlName="prenom"
-                    [status]="formGroup.get('prenom') | inputColor"
-                >
-            </div>
-            <div>
-                <label for="">numero:</label>
-                <input 
-                    nbInput 
-                    type="text" 
-                    formControlName="numero"
-                    [status]="formGroup.get('numero') | inputColor"
-                >
-            </div>
-            <div>
-                <label for="">description: </label>
-                <input 
-                 nbInput 
-                    type="text" 
-                    formControlName="description"
-                    [status]="formGroup.get('description') | inputColor"
-                >
-            </div>
-            <input nbButton type="submit" [disabled]="!formGroup.valid">
-        </form>
-    </section>
-</div>
+                    <div>
+                        <label for="">nom: </label>
+                        <input 
+                            nbInput 
+                            type="text" 
+                            formControlName="nom"
+                            [status]="formGroup.get('nom') | inputColor"
+                        >
+                    </div>
+                    <div>
+                        <label for="">prenom: </label>
+                        <input 
+                            nbInput 
+                            type="text" 
+                            formControlName="prenom"
+                            [status]="formGroup.get('prenom') | inputColor"
+                        >
+                    </div>
+                    <div>
+                        <label for="">numero:</label>
+                        <input 
+                            nbInput 
+                            type="text" 
+                            formControlName="numero"
+                            [status]="formGroup.get('numero') | inputColor"
+                        >
+                    </div>
+                    <div>
+                        <label for="">description: </label>
+                        <input 
+                        nbInput 
+                            type="text" 
+                            formControlName="description"
+                            [status]="formGroup.get('description') | inputColor"
+                        >
+                    </div>
+                    <input nbButton type="submit" [disabled]="!formGroup.valid">
+                </form>
+            </section>
+        </div>
+    </nb-card-body>
+</nb-card>

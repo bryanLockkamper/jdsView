@@ -45,7 +45,10 @@ export class AddRencontreComponent implements OnInit {
       photo: new FormGroup({
         lien: new FormControl(null)
       }),
-      jeuList: new FormControl(null, Validators.required)
+      jeuList: new FormControl(null, Validators.required),
+      utilisateurCrea: new FormGroup({
+        id: new FormControl(Number(localStorage.getItem('id')))
+      })
     });
   }
 
@@ -53,7 +56,7 @@ export class AddRencontreComponent implements OnInit {
     if (b) {
       this.form.get('date').setValue(this.form.get('date').value.getFullYear()
         + '-'
-        + ((this.form.get('date').value.getMonth() < 10) ? ('0' + this.form.get('date').value.getMonth()) : (this.form.get('date').value.getMonth()))
+        + ((this.form.get('date').value.getMonth()+1 < 10) ? ('0' + (this.form.get('date').value.getMonth()+1)) : (this.form.get('date').value.getMonth()+1))
         + '-'
         + this.form.get('date').value.getDate()
         + 'T'

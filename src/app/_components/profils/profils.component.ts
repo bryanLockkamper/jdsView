@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormControl, MinLengthValidator } from '@angular
 import { customValidators } from 'src/app/_shared/validators/custome-validators';
 import { UtilisateurService } from 'src/app/_services/utilisateur.service';
 import { Utilisateur } from 'src/app/_models/utilisateur.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profils',
@@ -12,10 +13,9 @@ import { Utilisateur } from 'src/app/_models/utilisateur.model';
 export class ProfilsComponent implements OnInit {
 
   formGroup: FormGroup;
-  regex:RegExp
-  
+  regex:RegExp;
+
   utilisateur:Utilisateur;
-  urilisateurTest:Utilisateur;
 
   constructor(
     private utilisateurservice:UtilisateurService
@@ -24,8 +24,7 @@ export class ProfilsComponent implements OnInit {
   ngOnInit(){
 
     this.utilisateurservice.getMonProfil(1).subscribe(x => {
-      this.utilisateur = x
-      this.urilisateurTest = x
+      this.utilisateur = x;
 
       this.regex =(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
       this.formGroup = new FormGroup({
@@ -57,14 +56,13 @@ export class ProfilsComponent implements OnInit {
         numero : new FormControl(this.utilisateur.numero,Validators.compose([
 
         ])),
-        photo : new FormControl(this.utilisateur.photo,Validators.compose([
-
-        ])),
+        photo : new FormGroup({
+          lien: new FormControl(null)
+        }),
       },Validators.compose([
         customValidators.compare('password','confirm')
       ]));
     });
-    
   }
 
   onSubmit(){
@@ -80,7 +78,27 @@ export class ProfilsComponent implements OnInit {
     this.utilisateur.numero = this.formGroup.value.numero;
     this.utilisateur.photo = this.formGroup.value.photo;
     this.utilisateurservice.getSaveMonProfil(this.utilisateur).subscribe();
-    console.log(this.urilisateurTest);
+  }
+
+  recupPhoto(files: any) {
+    this.getBase64(files[0]).subscribe(value => {
+      this.formGroup.get('photo').get('lien').setValue(value)
+    })
+    
+  }
+
+  getBase64(file): Observable<string> {
+    return new Observable<string>(sub => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        sub.next(reader.result.toString());
+        sub.complete();
+      };
+      reader.onerror = error => {
+        sub.error(error);
+      };
+    })
   }
 
 }
