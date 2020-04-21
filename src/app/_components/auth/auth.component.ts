@@ -4,7 +4,8 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { NbToastrService } from '@nebular/theme';
 import { Router } from '@angular/router';
 import { customValidators } from 'src/app/_shared/validators/custome-validators';
-import * as decode from 'jwt-decode';
+import { Utilisateur } from 'src/app/_models/utilisateur.model';
+import { UtilisateurService } from 'src/app/_services/utilisateur.service';
 
 @Component({
   selector: 'app-auth',
@@ -17,9 +18,11 @@ export class AuthComponent implements OnInit {
   registerForm: FormGroup;
 
   isRegistered: number;
+  user: Utilisateur;
 
   constructor(
     private authService: AuthService,
+    private userService: UtilisateurService,
     private toastrService: NbToastrService,
     private router: Router
   ) { }

@@ -1,0 +1,51 @@
+<div style="display: flex;">
+    <div style="width: 100%;">
+        <nb-card>
+            <nb-card-header>
+                <h3>List des jeux</h3>
+            </nb-card-header>
+            <nb-card-body>
+                <nb-list>
+                    <nb-list-item *ngFor="let item of models">
+                        <div style="display: flex;">
+                            <div  style="width: 100%;">
+                                <h4>{{item.titre}}</h4>
+                                <p>Description : {{item.description}}</p>
+                            </div>
+                            <div style="width: 20%;">
+                                <nb-icon icon="plus-circle-outline"
+                                    (click)="add(item)"></nb-icon>    
+                            </div>
+                        </div>
+                    </nb-list-item>
+                </nb-list>
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <div style="width: 50%;">
+        <nb-card >
+            <nb-card-header>
+                <h3>Mes jeux préférés</h3>
+            </nb-card-header>
+            <nb-card-body>
+                    <nb-list>
+                            <nb-list-item *ngFor="let item of utilisateur?.jeuPreferes">
+                                <div style="display: flex;">
+                                    <div  style="width: 100%;">
+                                        <h4>{{item.titre}}</h4>
+                                        <p>Description : {{item.description}}</p>
+                                    </div>
+                                    <div style="width: 20%;">
+                                        <nb-icon icon="close-circle-outline"
+                                            (click)="supp(item)"></nb-icon>    
+                                    </div>
+                                </div>
+                            </nb-list-item>
+                        </nb-list>
+                    <div style="width: 20%;">
+                        <button nbButton (click)="save(utilisateur)">save</button>    
+                    </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
