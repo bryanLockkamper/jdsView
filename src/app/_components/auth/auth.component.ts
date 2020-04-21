@@ -4,6 +4,8 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { NbToastrService } from '@nebular/theme';
 import { Router } from '@angular/router';
 import { customValidators } from 'src/app/_shared/validators/custome-validators';
+import { Utilisateur } from 'src/app/_models/utilisateur.model';
+import { UtilisateurService } from 'src/app/_services/utilisateur.service';
 
 @Component({
   selector: 'app-auth',
@@ -16,9 +18,11 @@ export class AuthComponent implements OnInit {
   registerForm: FormGroup
 
   isRegistered: number
+  user: Utilisateur;
 
   constructor(
     private authService: AuthService,
+    private userService: UtilisateurService,
     private toastrService: NbToastrService,
     private router: Router
   ) { }
@@ -102,7 +106,7 @@ export class AuthComponent implements OnInit {
     this.authService.register(this.registerForm.value).subscribe(token => {
       //====> Todo: gestion Token
       localStorage.setItem('TOKEN', token);
-      this.toastrService.info('Enregistré! Bienvenue sur notre site !!')
+            this.toastrService.info('Enregistré! Bienvenue sur notre site !!')
       //message de success
       //rediriger le user
       this.router.navigateByUrl('/home');

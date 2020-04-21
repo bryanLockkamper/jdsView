@@ -22,6 +22,8 @@ export class JeuComponent implements OnInit {
   jeuForm : FormGroup;
   modifJeuForm: FormGroup;
 
+  UserRoleList: string[];
+
   constructor(
     private jeuService : JeuService,
     private toastr: NbToastrService,
