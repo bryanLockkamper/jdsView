@@ -89,7 +89,7 @@ export class AuthComponent implements OnInit {
   login() {
     this.authService.login(this.loginForm.value)
       .subscribe(token => {
-        localStorage.setItem('token', JSON.stringify(token['token']));
+        localStorage.setItem("token", JSON.stringify(token['token']))
         this.toastrService.info('Connecté! Bienvenue sur notre site !!');
         //message de success
         //rediriger le user
@@ -103,7 +103,7 @@ export class AuthComponent implements OnInit {
 
   register() {
     this.authService.register(this.registerForm.value).subscribe(token => {
-      localStorage.setItem('token', JSON.stringify(token['token']));
+      localStorage.setItem('token', token);
       this.toastrService.info('Enregistré! Bienvenue sur notre site !!');
       //message de success
       //rediriger le user

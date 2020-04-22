@@ -16,7 +16,7 @@ export class AuthService {
 
   login(model: LoginModel):Observable<string> {
     return this.httpClient.post<string>(
-      environment.apiDomain + 'seConnecter',
+      environment.apiDomain + 'auth/sign-in',
       model
     );
   }
@@ -25,6 +25,12 @@ export class AuthService {
     return this.httpClient.post<string>(
       environment.apiDomain + 'inscription',
       model
+    );
+  }
+
+  logout() {
+    return this.httpClient.get(
+      environment.apiDomain + 'seDeconnecter'
     );
   }
 }

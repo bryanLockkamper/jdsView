@@ -7,6 +7,14 @@ import { JeuComponent } from './_components/jeu/jeu.component';
 import { RencontreComponent } from './_components/rencontre/rencontre.component';
 import { GenreComponent } from './_components/genre/genre.component';
 import { JeuPrefereComponent } from './_components/jeu-prefere/jeu-prefere.component';
+import {
+  NbAuthComponent,
+  NbLoginComponent,
+  NbRegisterComponent,
+  NbLogoutComponent,
+  NbRequestPasswordComponent,
+  NbResetPasswordComponent,
+} from '@nebular/auth';
 
 
 const routes: Routes = [
@@ -18,6 +26,36 @@ const routes: Routes = [
   { path: 'rencontre', component: RencontreComponent },
   { path: 'genre', component: GenreComponent },
   { path: 'jeu-prefere', component: JeuPrefereComponent },
+  {
+    path: 'auth',
+    component: NbAuthComponent,
+    children: [
+      {
+        path: '',
+        component: NbLoginComponent,
+      },
+      {
+        path: 'login',
+        component: NbLoginComponent,
+      },
+      {
+        path: 'register',
+        component: NbRegisterComponent,
+      },
+      {
+        path: 'logout',
+        component: NbLogoutComponent,
+      },
+      {
+        path: 'request-password',
+        component: NbRequestPasswordComponent,
+      },
+      {
+        path: 'reset-password',
+        component: NbResetPasswordComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({

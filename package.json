@@ -20,10 +20,13 @@
     "@angular/platform-browser": "~9.1.0",
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
+    "@nebular/auth": "^5.0.0-beta.8",
     "@nebular/eva-icons": "5.0.0",
     "@nebular/theme": "^5.0.0",
     "eva-icons": "^1.1.2",
     "jwt-decode": "^2.2.0",
+    "latest": "^0.2.0",
+    "mixin": "^0.2.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
