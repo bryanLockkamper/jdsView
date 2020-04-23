@@ -5,6 +5,8 @@ import { NbToastrService } from '@nebular/theme';
 import { JeuService } from 'src/app/_services/jeu.service';
 import { GenreService } from 'src/app/_services/genre.service';
 import { Genre } from 'src/app/_models/Genre.model';
+import { UtilisateurService } from 'src/app/_services/utilisateur.service';
+import * as decode from 'jwt-decode';
 
 @Component({
   selector: 'app-jeu',
@@ -22,16 +24,30 @@ export class JeuComponent implements OnInit {
   jeuForm : FormGroup;
   modifJeuForm: FormGroup;
 
-  UserRoleList: string[];
+  bol : Boolean;
+  roles : string[];
 
   constructor(
     private jeuService : JeuService,
     private toastr: NbToastrService,
     private genreServ : GenreService,
-  ) { }
+    private userService : UtilisateurService,
+    ) { }
 
   ngOnInit(): void {
+
+    //Todo : voir les affichages qui doit voir quoi
+    // this.roles = decode(localStorage.getItem('token')).roles;
+
+    // this.roles.forEach(element => {
+    //   if (element == 'Admin')
+    //   return this.bol =true; 
+    //   else 
+    //   this.bol = false;
+    // });
+    
     this.choix = 1;
+
     this.jeuForm = new FormGroup({
     'titre': new FormControl(
       null,

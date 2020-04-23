@@ -36,6 +36,7 @@ import {AddRencontreComponent} from './_components/rencontre/add-rencontre/add-r
 import {JeuPrefereComponent} from './_components/jeu-prefere/jeu-prefere.component';
 import {TokenInterceptor} from "./_components/auth/token.interceptor";
 import {NbPasswordAuthStrategy, NbAuthModule} from '@nebular/auth';
+import { MessageComponent } from './_components/message/message.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import {NbPasswordAuthStrategy, NbAuthModule} from '@nebular/auth';
     RencontreComponent,
     AddRencontreComponent,
     JeuPrefereComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
