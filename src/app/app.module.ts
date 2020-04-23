@@ -35,7 +35,6 @@ import {SharedModule} from './_shared/shared.module';
 import {AddRencontreComponent} from './_components/rencontre/add-rencontre/add-rencontre.component';
 import {JeuPrefereComponent} from './_components/jeu-prefere/jeu-prefere.component';
 import {TokenInterceptor} from "./_components/auth/token.interceptor";
-import {NbPasswordAuthStrategy, NbAuthModule} from '@nebular/auth';
 import { MessageComponent } from './_components/message/message.component';
 
 
@@ -78,36 +77,6 @@ import { MessageComponent } from './_components/message/message.component';
     FormsModule,
     SharedModule,
     NbTabsetModule,
-    NbAuthModule.forRoot({
-      strategies: [
-        NbPasswordAuthStrategy.setup({
-          name: 'email',
-
-          baseEndpoint: 'http://localhost:8080',
-          login: {
-            endpoint: '/auth/sign-in',
-            method: 'post',
-          },
-          register: {
-            endpoint: '/auth/sign-up',
-            method: 'post',
-          },
-          logout: {
-            endpoint: '/auth/sign-out',
-            method: 'post',
-          },
-          requestPass: {
-            endpoint: '/auth/request-pass',
-            method: 'post',
-          },
-          resetPass: {
-            endpoint: '/auth/reset-pass',
-            method: 'post',
-          },
-        }),
-      ],
-      forms: {},
-    }),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
