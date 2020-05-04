@@ -9,7 +9,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UtilisateurService {
 
-
   constructor(
     private httpClient: HttpClient
   ) { }

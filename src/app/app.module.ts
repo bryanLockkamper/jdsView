@@ -21,7 +21,7 @@ import {
   NbListModule,
   NbActionsModule,
   NbIconModule,
-  NbTabsetModule, NbRouteTabsetModule
+  NbTabsetModule, NbRouteTabsetModule, NbChatModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
@@ -77,6 +77,7 @@ import { MessageComponent } from './_components/message/message.component';
     FormsModule,
     SharedModule,
     NbTabsetModule,
+    NbChatModule.forRoot(),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}

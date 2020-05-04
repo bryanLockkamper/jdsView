@@ -1,1 +1,10 @@
-<p>message works!</p>
+<nb-chat title="Nebular Chat" style="max-height: 700px;">
+    <nb-chat-message *ngFor="let msg of messages"
+                     [message]="msg.content"
+                     [sender]="msg.sender"
+                     [date]="msg.date">
+</nb-chat-message>
+
+<nb-chat-form (send)="sendMessage($event)" [dropFiles]="true">
+</nb-chat-form>
+</nb-chat>

@@ -1,5 +1,11 @@
+import { Utilisateur } from './utilisateur.model';
+
 export interface Message {
-    auteur: string;
-    contenu: string;
+    sender: string;
+    content: string;
     date: Date;
+    reply: Boolean;
+    type: string;
+    // files?:File;
+    user:Utilisateur;
 }

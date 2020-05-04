@@ -23,10 +23,18 @@
     "@auth0/angular-jwt": "^4.0.0",
     "@nebular/eva-icons": "5.0.0",
     "@nebular/theme": "^5.0.0",
+    "@stomp/stompjs": "^5.4.4",
+    "@types/sockjs-client": "^1.1.1",
     "eva-icons": "^1.1.2",
+    "jquery": "^3.5.0",
     "jwt-decode": "^2.2.0",
+    "net": "^1.0.2",
+    "node-stomp": "^1.1.0",
     "rxjs": "~6.5.4",
+    "sockjs": "^0.3.20",
+    "sockjs-client": "^1.4.0",
     "tslib": "^1.10.0",
+    "websocket": "^1.0.31",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

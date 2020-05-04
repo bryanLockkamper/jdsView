@@ -8,6 +8,7 @@ import { RencontreComponent } from './_components/rencontre/rencontre.component'
 import { GenreComponent } from './_components/genre/genre.component';
 import { JeuPrefereComponent } from './_components/jeu-prefere/jeu-prefere.component';
 import { IsAdminGuard } from './_guards/is-admin.guard';
+import { MessageComponent } from './_components/message/message.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'rencontre', component: RencontreComponent , canActivate: [IsAdminGuard ]},
   { path: 'genre', component: GenreComponent },
   { path: 'jeu-prefere', component: JeuPrefereComponent },
+  { path: 'message', component: MessageComponent },
 ];
 
 @NgModule({
