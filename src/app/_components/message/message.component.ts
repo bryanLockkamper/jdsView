@@ -19,24 +19,21 @@ export class MessageComponent implements OnInit {
   disabled = true;
   newmessage: Message;
   user : Utilisateur;
-  // greeting: string;
 
   private stompClient;
   idUtilisateur = decode(localStorage.getItem('token')).userInfo.id;
 
   constructor(    
-    private userService : UtilisateurService
-  ) {
-    this.initializeWebSocketConnection();
-   }
+    private userService : UtilisateurService,
+  ) { }
 
   ngOnInit(): void {
-    
     this.messages = [];
+    
     this.userService.getMonProfil(this.idUtilisateur).subscribe(data =>{
       this.user = data;
     });
-    
+    this.initializeWebSocketConnection();
   }
 
   initializeWebSocketConnection(){
@@ -47,11 +44,11 @@ export class MessageComponent implements OnInit {
     this.stompClient.connect({}, function(frame) {
       that.stompClient.subscribe("/chat", (message) => {
         if(message.body) {
-      
-          console.log( message.body);
-          this.messages= [];
-          this.messages.push(message);
-          
+
+          console.log("RECEIVE :" + message.body);
+
+          that.showMessage(message.body);
+
         }
       });
     });
@@ -63,6 +60,17 @@ export class MessageComponent implements OnInit {
     if (connected) {
       this.messages = [];
     }
+  }
+
+  showMessage(message: Message) {
+    
+    this.newmessage = message;
+    this.messages.push(message);
+
+    this.messages.forEach(element => {
+      console.log("Tab :" + element);
+      
+    });
   }
 
   sendMessage(event : any) {
@@ -86,10 +94,6 @@ export class MessageComponent implements OnInit {
       user: this.user
     };
 
-    console.log(this.newmessage.user.pseudo + " : " + this.newmessage.content);
-    
-    this.messages.push(this.newmessage);
-    
     this.stompClient.send(
       '/app/send/message',
       {},
