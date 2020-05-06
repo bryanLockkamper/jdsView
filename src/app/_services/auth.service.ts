@@ -17,7 +17,7 @@ export class AuthService {
 
   login(model: LoginModel):Observable<string> {
     return this.httpClient.post<string>(
-      environment.apiDomain + 'auth/sign-in',
+      environment.apiDomain + 'seConnecter',
       model
     );
   }

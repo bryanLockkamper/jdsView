@@ -14,11 +14,11 @@
       </nb-tab>
     </nb-tabset>
   </nb-card-header>
-  <nb-card-body>
+  <nb-card-body [hidden]="actualTab == 'Créer une rencontre'">
     <nb-list>
       <nb-list-item *ngFor="let item of models">
-        <div style="display: flex;" *ngIf="filter(item)">
-          <div style="width: 100%;">
+        <div style="display: flex;">
+          <div style="width: 100%">
             <h4>{{item.date}} : {{item.titre}}</h4>
             <p>Description : {{item.description}}</p>
             <img [src]="item.photo?.lien" alt="y a pas de photo monsieur">

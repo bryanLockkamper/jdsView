@@ -12,14 +12,14 @@
                 </div>
 
                 <div class="login" *ngIf="isRegistered == 2">
-                    <form [formGroup]="loginForm" (ngSubmit)="login()">
+                    <form [formGroup]="loginForm" (ngSubmit)="login()" >
                         <div class="input-group">
                             <input nbInput type="email" placeholder="email"
-                                   formControlName="email">
+                                   formControlName="email" [status]="loginForm.get('email') | inputColor">
                         </div>
                         <div class="input-group">
                             <input nbInput type="password" placeholder="password"
-                                   formControlName="password">
+                                   formControlName="password" [status]="loginForm.get('password') | inputColor">
                         </div>
                         <div class="input-group">
                             <input nbButton type="submit" value="LOGIN"
@@ -48,9 +48,10 @@
                             <input nbInput type="text" placeholder="pseudo"
                                    formControlName="pseudo">
                         </div>
+
                         <div class="input-group">
-                            <input nbInput type="date" placeholder="dateNaissance"
-                                   formControlName="dateNaissance">
+                          <input nbInput [nbDatepicker]="datepicker" formControlName="dateNaissance">
+                          <nb-datepicker #datepicker [max]="max" [date]="today"></nb-datepicker>
                         </div>
                         <div class="input-group">
                             <input nbButton type="submit" value="REGISTER"
@@ -59,7 +60,7 @@
                     </form>
                 </div>
 
-            </nb-card> 
+            </nb-card>
     </nb-card-body>
 
     <nb-card-footer>

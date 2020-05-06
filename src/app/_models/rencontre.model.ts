@@ -13,6 +13,6 @@ export interface Rencontre {
     description:string;
     photo:Photo;
     jeuList:Jeu[];
-    utilisateurCrea:Utilisateur;
+    groupeCrea:Utilisateur;
     utilisateurAffList:Utilisateur[];
 }

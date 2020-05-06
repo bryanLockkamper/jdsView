@@ -13,18 +13,18 @@ export class IsAdminGuard implements CanActivate {
   constructor(private router: Router) {
 
   }
-  
+
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
       this.token = decode(localStorage.getItem('token')).roles;
-      
-      if(this.token.includes("Admin")){
+
+      if(this.token.includes("ROLE_ADMIN")){
 
         return true;
       }
-      else if(!this.token.includes("Admin")){
+      else if(!this.token.includes("ROLE_ADMIN")){
         this.router.navigateByUrl('/auth');
       }
       return false;

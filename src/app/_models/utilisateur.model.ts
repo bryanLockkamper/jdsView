@@ -4,6 +4,11 @@ import { Photo } from './photo.model';
 import { Rencontre } from './rencontre.model';
 import { Role } from './role.model';
 
+export interface Groupe {
+  id:number;
+  nom:string;
+}
+
 export interface Utilisateur {
     id:number;
     pseudo:string;
@@ -20,4 +25,5 @@ export interface Utilisateur {
     rencontreAffList:Rencontre[];
     rencontreCreaList:Rencontre[];
     roles:Role[];
+    groupes:Groupe[];
 }
