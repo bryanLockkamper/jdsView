@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Stomp, Client } from '@stomp/stompjs';
+import { Component, OnInit , ChangeDetectorRef} from '@angular/core';
+import { Stomp } from '@stomp/stompjs';
 import { environment } from 'src/environments/environment';
 import { Message } from 'src/app/_models/message.model';
 import * as SockJS from 'sockjs-client';
@@ -25,7 +25,9 @@ export class MessageComponent implements OnInit {
 
   constructor(    
     private userService : UtilisateurService,
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
+
 
   ngOnInit(): void {
     this.messages = [];
@@ -45,9 +47,8 @@ export class MessageComponent implements OnInit {
       that.stompClient.subscribe("/chat", (message) => {
         if(message.body) {
 
-          console.log("RECEIVE :" + message.body);
-
-          that.showMessage(message.body);
+          this.newmessage = JSON.parse(message.body);
+          that.showMessage(this.newmessage);          
 
         }
       });
@@ -63,14 +64,18 @@ export class MessageComponent implements OnInit {
   }
 
   showMessage(message: Message) {
-    
-    this.newmessage = message;
-    this.messages.push(message);
-
-    this.messages.forEach(element => {
-      console.log("Tab :" + element);
-      
-    });
+    this.newmessage = {
+      sender: message.sender,
+      content: message.content,
+      date: message.date,
+      reply: message.reply,
+      type: message.type,
+      // type: files.length ? 'file' : 'CHAT',
+      // files: files,
+      user: message.user
+    };
+    this.messages.push(this.newmessage);
+    this.changeDetectorRef.detectChanges();
   }
 
   sendMessage(event : any) {
@@ -99,5 +104,7 @@ export class MessageComponent implements OnInit {
       {},
       JSON.stringify(this.newmessage)
     );
+
+    this.newmessage = null;
   }
 }
