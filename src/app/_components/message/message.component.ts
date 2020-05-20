@@ -48,7 +48,7 @@ export class MessageComponent implements OnInit {
         if(message.body) {
 
           this.newmessage = JSON.parse(message.body);
-          that.showMessage(this.newmessage);          
+          that.showMessage(this.newmessage);                   
 
         }
       });
@@ -76,6 +76,7 @@ export class MessageComponent implements OnInit {
     };
     this.messages.push(this.newmessage);
     this.changeDetectorRef.detectChanges();
+    this.newmessage = null;
   }
 
   sendMessage(event : any) {
@@ -104,7 +105,5 @@ export class MessageComponent implements OnInit {
       {},
       JSON.stringify(this.newmessage)
     );
-
-    this.newmessage = null;
   }
 }
