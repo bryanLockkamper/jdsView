@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/_services/auth.service';
-import { NbToastrService } from '@nebular/theme';
+import {NbDateService, NbToastrService} from '@nebular/theme';
 import { Router } from '@angular/router';
 import { customValidators } from 'src/app/_shared/validators/custome-validators';
 import { Utilisateur } from 'src/app/_models/utilisateur.model';
@@ -20,17 +20,21 @@ export class AuthComponent implements OnInit {
 
   isRegistered: number;
   user: Utilisateur;
+  max;
+  today;
 
   constructor(
     private authService: AuthService,
     private userService: UtilisateurService,
     private toastrService: NbToastrService,
-    private router: Router
+    private router: Router,
+    private dateService: NbDateService<Date>
   ) { }
 
   ngOnInit(): void {
     this.isRegistered = 0;
-
+    this.max = this.dateService.addYear(this.dateService.today(), -18);
+    this.today = this.dateService.addYear(this.dateService.today(), -18);
     this.loginForm = new FormGroup({
       'email': new FormControl(
         null,
@@ -44,7 +48,8 @@ export class AuthComponent implements OnInit {
         null,
         Validators.compose([
           Validators.required,
-          Validators.max(255)
+          Validators.max(30),
+          Validators.pattern("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$")
         ])
       )
     });
@@ -84,6 +89,7 @@ export class AuthComponent implements OnInit {
         null,
         Validators.required
       ),
+      groupes: new FormControl()
     })
   }
 
@@ -103,6 +109,7 @@ export class AuthComponent implements OnInit {
   }
 
   register() {
+    this.registerForm.get('groupes').setValue([{id : 1, nom :'ForeverAlone'}])
     this.authService.register(this.registerForm.value).subscribe(token => {
       localStorage.setItem('token', token);
       this.toastrService.info('Enregistré! Bienvenue sur notre site !!');
@@ -110,8 +117,7 @@ export class AuthComponent implements OnInit {
       //rediriger le user
       this.router.navigateByUrl('/home');
     }, error => {
-      console.log(error);
-      this.toastrService.danger('Login ou mdp incorrect!!')
+      this.toastrService.danger(error.error.text)
       //message d'erreur
     });
 

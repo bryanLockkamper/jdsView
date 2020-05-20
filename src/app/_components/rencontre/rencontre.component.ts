@@ -15,7 +15,7 @@ export class RencontreComponent implements OnInit {
 
   models: Rencontre[];
   actualTab;
-  idUtilisateur = decode(localStorage.getItem('token')).userInfo.id;
+  utilisateur = decode(localStorage.getItem('token')).userInfo;
 
   constructor(
     private rencontreService: RencontreService,
@@ -28,7 +28,9 @@ export class RencontreComponent implements OnInit {
   ngOnInit(): void {
     this.models = [];
     this.rencontreService.getAllRencontre();
-    this.rencontreService.context$.subscribe(data => this.models = data);
+    this.rencontreService.context$.subscribe(data => {
+      this.models = data
+    });
   }
 
   delete(toDelete: Rencontre) {
@@ -60,29 +62,33 @@ export class RencontreComponent implements OnInit {
 
   changeTab($event: any) {
     this.actualTab = $event.tabTitle
+    this.models = [];
+    this.rencontreService.getAllRencontre();
+    this.rencontreService.context$.subscribe(data => {
+      this.models = data.filter(value => this.filter(value))
+    });
   }
 
   filter(item: Rencontre) {
     switch (this.actualTab) {
       case 'Je participe':
         for (let i = 0; i < item.utilisateurAffList.length; i++) {
-          if (item.utilisateurAffList[i].id == this.idUtilisateur)
+          if (item.utilisateurAffList[i].id == this.utilisateur.id)
             return true;
         }
         return false;
       case 'Je peux participer':
         if (new Date(item.date) > new Date()
-          && item.utilisateurCrea.id != this.idUtilisateur
+          && item.groupeCrea.id != this.utilisateur.id
           && item.utilisateurAffList.length < item.nbrParticipantLimite) {
           if (item.utilisateurAffList.length > 0
-            && item.utilisateurAffList.find(value => value.id != this.idUtilisateur)) {
+            && item.utilisateurAffList.find(value => value.id != this.utilisateur.id)) {
             return true;
-          }
-          else return item.utilisateurAffList.length == 0;
+          } else return item.utilisateurAffList.length == 0;
         }
         return false;
       case "J\'ai créer":
-        return item.utilisateurCrea.id == this.idUtilisateur;
+        return this.utilisateur.groupes.find(utilisateur => utilisateur.id == item.groupeCrea.id);
     }
   }
 
@@ -102,7 +108,8 @@ export class RencontreComponent implements OnInit {
       rencontreAffList: [],
       rencontreCreaList: [],
       roles: [],
-      id: this.idUtilisateur
+      id: this.utilisateur.id,
+      groupes: []
     });
     this.rencontreService.modifier(item).subscribe(
       () => {
@@ -115,7 +122,7 @@ export class RencontreComponent implements OnInit {
   }
 
   desinscription(item: Rencontre) {
-    item.utilisateurAffList = item.utilisateurAffList.filter(value => value.id != this.idUtilisateur);
+    item.utilisateurAffList = item.utilisateurAffList.filter(value => value.id != this.utilisateur.id);
     this.rencontreService.modifier(item).subscribe(
       () => {
         this.toastr.success('Vous êtes désinscrit');

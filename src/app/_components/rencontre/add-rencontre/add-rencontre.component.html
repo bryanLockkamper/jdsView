@@ -16,6 +16,9 @@
   <nb-select multiple placeholder="Liste des jeux" formControlName="jeuList">
     <nb-option *ngFor="let i of jeuList" [value]="i">{{i.titre}} </nb-option>
   </nb-select>
+  <nb-select placeholder="Groupe de création" formControlName="groupeCrea">
+    <nb-option *ngFor="let i of groupes" [value]="i">{{i.nom}} </nb-option>
+  </nb-select>
   <input nbInput type="file" placeholder="Photo" (change)="recupPhoto($event.target.files)">
   <div formGroupName="photo"><input nbInput type="text" formControlName="lien" hidden></div>
   <input nbButton type="submit" value="Annuler" (click)="close(false)">

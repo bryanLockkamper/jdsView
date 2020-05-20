@@ -26,7 +26,7 @@ export class ProfilsComponent implements OnInit {
 
     this.utilisateurservice.getMonProfil(decode(localStorage.getItem('token')).userInfo.id).subscribe(x => {
       this.utilisateur = x;
-
+      
       this.regex =(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
       this.formGroup = new FormGroup({
         email : new FormControl('Exemple@test.com', Validators.compose([
@@ -85,7 +85,7 @@ export class ProfilsComponent implements OnInit {
     this.getBase64(files[0]).subscribe(value => {
       this.formGroup.get('photo').get('lien').setValue(value)
     })
-    
+
   }
 
   getBase64(file): Observable<string> {

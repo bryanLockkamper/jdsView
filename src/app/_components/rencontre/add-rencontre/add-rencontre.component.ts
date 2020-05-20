@@ -5,6 +5,8 @@ import {$e} from "codelyzer/angular/styles/chars";
 import {Observable} from "rxjs";
 import {Jeu} from "../../../_models/jeu.model";
 import {JeuService} from "../../../_services/jeu.service";
+import {Groupe} from "../../../_models/utilisateur.model";
+import {GroupeService} from "../../../_services/groupe.service";
 
 @Component({
   selector: 'app-add-rencontre',
@@ -16,10 +18,12 @@ export class AddRencontreComponent implements OnInit {
   form: FormGroup;
   jeuList: Jeu[];
   min: Date;
+  groupes: Groupe[];
 
   constructor(
     protected dialogRef: NbDialogRef<AddRencontreComponent>,
     private jeuService: JeuService,
+    private groupeService: GroupeService,
     private dateService: NbDateService<Date>
   ) {
   }
@@ -29,6 +33,12 @@ export class AddRencontreComponent implements OnInit {
     this.jeuList = [];
     this.jeuService.getAllJeu();
     this.jeuService.context$.subscribe(data => this.jeuList = data);
+    this.groupes = [];
+    this.groupeService.getAllGroupe();
+    this.groupeService.context$.subscribe(data => {
+      this.groupes = data
+      console.log(this.groupes)
+    });
     this.form = new FormGroup({
       titre: new FormControl(null, Validators.required),
       date: new FormControl(null, Validators.required),
@@ -46,9 +56,7 @@ export class AddRencontreComponent implements OnInit {
         lien: new FormControl(null)
       }),
       jeuList: new FormControl(null, Validators.required),
-      utilisateurCrea: new FormGroup({
-        id: new FormControl(Number(localStorage.getItem('id')))
-      })
+      groupeCrea: new FormControl()
     });
   }
 
@@ -61,6 +69,7 @@ export class AddRencontreComponent implements OnInit {
         + this.form.get('date').value.getDate()
         + 'T'
         + this.form.get('time').value + ':00');
+      console.log(this.form.value)
       this.dialogRef.close(this.form.value)
     } else this.dialogRef.close('cancel');
   }
